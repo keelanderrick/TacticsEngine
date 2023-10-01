@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cus651egdiuq8"]
+
+[ext_resource type="Script" path="res://Scripts/TileMap.cs" id="1_6atcb"]
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_wshk0"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 4.5, 5, 11)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.784246, 0.62045, 0, -0.62045, 0.784246, 0, 2.71702, -2.25034)
+light_energy = 0.732
+light_indirect_energy = 2.05
+light_volumetric_fog_energy = 8.619
+light_angular_distance = 74.57
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("1_wshk0")
+
+[node name="TileMap" type="Node3D" parent="."]
+script = ExtResource("1_6atcb")
