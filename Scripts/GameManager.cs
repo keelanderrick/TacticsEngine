@@ -1,15 +1,16 @@
 using Godot;
+using System.Collections.Generic;
 using System;
 using System.Diagnostics;
 using System.Linq;
 
 public partial class GameManager : Node3D
 {
-	Node3D previousHighlight;
+	List<Node3D> previousHighlight;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		previousHighlight = new List<Node3D>();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,17 +31,20 @@ public partial class GameManager : Node3D
 		query.CollideWithAreas = true;
 
 		var result = space.IntersectRay(query);
+		foreach(Node3D highlight in previousHighlight) {
+			highlight.Hide();
+		}
+		previousHighlight.Clear();
 		if(result.ContainsKey("collider")) {
-			Node3D target = (Node3D)result["collider"];
-			target = target.FindChild("Highlight") as Node3D;
-			if(previousHighlight != null) previousHighlight.Hide();
+			Tile target = (Node3D)result["collider"] as Tile;
 			if(target != null) {
-				previousHighlight = target;
-				target.Show();
+				previousHighlight.Add(target.highlight);
+				target.highlight.Show();
+				foreach(Tile tile in target.neighbors) {
+					previousHighlight.Add(tile.highlight);
+					tile.highlight.Show();
+				}
 			}
-		} else if (previousHighlight != null) {
-			previousHighlight.Hide();
-			previousHighlight = null;
 		}
 	}
 }
