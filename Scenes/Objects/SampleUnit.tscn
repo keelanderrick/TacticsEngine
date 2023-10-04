@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6tt7c2stfd3d"]
+
+[ext_resource type="Script" path="res://Scripts/Unit.cs" id="1_gaxdf"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D"]
+script = ExtResource("1_gaxdf")
